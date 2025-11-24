@@ -1,140 +1,883 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>NoteIQ Landing Page</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #f7f7f7;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NoteIQ — Landing</title>
+  <style>
+    :root{
+      --primary: #1a9f70; /* main color */
+      --primary-600: #168b61; /* slightly darker */
+      --primary-400: #34b782; /* slightly lighter */
+      --accent: #0f6b49;
+      --muted: #e9f7f2;
+      --white: #ffffff;
+      --text: #042016;
+      --max-width: 1100px;
+      --radius: 12px;
+      --gap: 24px;
     }
-    .container {
-        display: flex;
-        justify-content: space-between;
-        padding: 50px;
-        max-width: 1300px;
-        margin: auto;
+
+    /* Reset + base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background:linear-gradient(180deg,var(--primary) 0%, var(--primary-400) 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+      scroll-behavior:smooth;
     }
-    .left-section {
-        width: 50%;
-        padding-right: 40px;
+
+    .container{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:48px 20px;
     }
-    .left-section h1 {
-        font-size: 48px;
-        color: #222;
+
+    /* Header */
+    header{
+     position:static; top:auto; z-index:auto; border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .left-section h1 span {
-        color: #00a185;
+    .header-inner{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:12px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
     }
-    .feature {
-        margin-top: 20px;
-        padding: 15px 0;
-        display: flex;
-        gap: 15px;
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--white);
+      text-decoration:none;
     }
-    .feature-icon {
-        width: 45px;
-        height: 45px;
-        background: #007b7f;
-        border-radius: 8px;
+
+    .logo-img{
+      height:5rem;
+      width:8rem;
+      display:block;
+      object-fit:contain;
     }
-    .feature-text h3 {
-        margin: 0;
-        font-size: 18px;
+
+    /* Sections */
+    section{
+      padding:48px 0;
+      margin-bottom:12px;
+      border-radius:var(--radius);
     }
-    .feature-text p {
-        margin: 5px 0 0 0;
-        color: #555;
+
+    /* Form & Features (main split) */
+    #form-section{
+      background: #ffffff;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      padding:32px;
     }
-    .form-section {
-        width: 40%;
-        background: #ffffff;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+
+    /* override styles moved from inline */
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 460px;
+      gap:40px;
+      align-items:start;
     }
-    .form-section h2 {
-        text-align: center;
-        color: #222;
+    @media (max-width:980px){
+      .split{grid-template-columns: 1fr; }
+      #form-section{padding:20px;}
     }
-    .form-group {
-        margin: 15px 0;
+
+    .hero{
+      color:var(--white);
     }
-    input {
-        width: 100%;
-        padding: 12px;
-        font-size: 15px;
-        border-radius: 6px;
-        border: 1px solid #ccc;
+
+    .form-heading{
+      margin:0 0 16px 0;
+      font-size:42px;
+      font-weight:800;
+      line-height:1.02;
+      letter-spacing:-0.02em;
+      text-shadow: 0 6px 18px rgba(10,10,10,0.12);
+      color:#0d3b2c;
     }
-    button {
-        width: 100%;
-        padding: 14px;
-        background: #007b7f;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        margin-top: 10px;
-        font-size: 18px;
-        cursor: pointer;
+
+    .hero-lead{
+      margin:0 0 28px 0;
+      color:#1a1a1a;
+      font-size:1.05rem;
+      max-width:55ch;
     }
-    button:hover {
-        background: #005f61;
+
+    /* Features vertical stack (moved inline -> css) */
+    .features-vertical{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      margin-top:18px;
     }
-</style>
+
+    .feature{
+      background:#f4f7f6;
+      padding:16px;
+      border-radius:10px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      border:1px solid #e3e8e6;
+      color:#000;
+    }
+    .feature h4{
+      margin:0 0 4px 0;
+      font-size:1.05rem;
+      color:#113b2b;
+    }
+    .feature p{
+      margin:0;
+      color:#333;
+    }
+
+    .icon{
+      min-width:40px;
+      height:40px;
+      border-radius:8px;
+      background:#1a9f70;
+      color:#ffffff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:1rem;
+    }
+
+    /* Right column (form area) */
+    .form-wrap{
+      background:var(--white);
+      border-radius:12px;
+      padding:18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border:1px solid #e8eceb;
+    }
+    @media (max-width:980px){
+      .form-wrap{order:2}
+    }
+
+    #fs-form-root{
+      min-height:320px;
+    }
+
+/* Trust section: two-column layout matching Section 2 style */
+#trust {
+  background: linear-gradient(180deg, var(--primary-600), var(--primary));
+  color: var(--white);
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+/* Use grid to create left (image) and right (content) halves */
+.trust-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two equal halves */
+  gap: 32px;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+/* Left: image container with card look */
+.trust-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trust-image-card {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.06);
+  aspect-ratio: 16 / 10; /* nice wide aspect */
+}
+
+/* The actual image — keep entire image visible (no cropping) */
+.trust-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* ensure entire image is visible */
+  object-position: center;
+  display: block;
+  background-color: rgba(0,0,0,0.04);
+}
+
+/* Right: trust content (card) */
+.trust-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trust-card {
+  background: #ffffff;
+  color: #172a27;
+  padding: 32px 36px;
+  border-radius: 18px;
+  width: 100%;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* Title inside the card for visual consistency */
+.trust-card h3 {
+  margin: 0 0 14px 0;
+  font-size: 22px;
+  line-height: 1.05;
+  color: #0f2b24;
+  letter-spacing: 0.2px;
+}
+
+/* List styling */
+.trust-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+}
+
+.trust-list li {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:18px;
+  font-size:1.05rem;
+  color: #2c3b3a;
+}
+
+.trust-list .star {
+  font-size:1.4rem;
+  color:#f7c200;
+}
+
+/* Keep small copy readable */
+.trust-card p {
+  margin: 6px 0 0 0;
+  color: #2f3f3d;
+  font-size:0.98rem;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 980px) {
+  .trust-split {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 18px 16px;
+  }
+
+  .trust-image-card {
+    aspect-ratio: 16 / 9;
+  }
+
+  .trust-card {
+    padding: 24px;
+  }
+}
+
+/* Accessibility: focus outline for image card if keyboard lands there */
+.trust-image-card:focus {
+  outline: 3px solid rgba(26,159,112,0.18);
+  outline-offset: 4px;
+}
+
+
+    /* Glimpses */
+    #glimpses{
+      background: linear-gradient(180deg, var(--primary-400), rgba(255,255,255,0.02));
+      color:var(--white);
+    }
+
+    /* Contact */
+    #contact{
+      background: linear-gradient(180deg,var(--primary), var(--accent));
+      color:var(--white);
+    }
+    .contact-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+    }
+    @media (max-width:880px){
+      .contact-inner{flex-direction:column;align-items:flex-start}
+    }
+
+    .contact-details p{margin:6px 0;color:rgba(255,255,255,0.95)}
+    .contact-details .address-line{margin:2px 0;color:rgba(255,255,255,0.95)}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:var(--white);
+      color:var(--primary);
+      padding:12px 18px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+      cursor:pointer;
+      border:none;
+    }
+    .btn2{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:#12344d;
+      color:var(--white);
+      padding:12px 18px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+      cursor:pointer;
+      border:none;      
+      justify-content: center;
+    }
+
+    /* Footer small */
+    footer{
+      padding:18px 0;
+      color:rgba(255,255,255,0.85);
+      text-align:center;
+      font-size:0.92rem
+    }
+    
+.cta-text {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #0d3b2c;
+  font-weight: 600;
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.95;
+}
+
+
+
+    /* Utility */
+    .muted{color:rgba(255,255,255,0.85); font-size:0.96rem}
+
+    /* Glimpses modal/grid styles (moved up so all css in one place) */
+    .glimpse-grid-large{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:50px;
+      align-items:start;
+    }
+
+   
+    .glimpse-item{
+      margin:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .glimpse-btn{
+      border:0;
+      padding:0;
+      margin:0;
+      background:transparent;
+      cursor:pointer;
+      display:block;
+      width:100%;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    
+    .glimpse-btn:focus{
+      outline:3px solid rgba(26,159,112,0.22);
+      transform:translateY(-4px);
+    }
+    .glimpse-btn:hover{
+      transform:translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+    }
+
+    .glimpse-item img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      display:block;
+      border-radius:12px;
+    }
+
+    .glimpse-caption{
+      margin-top:10px;
+      color:#ffffff;
+      font-size:0.98rem;
+      opacity:0.95;
+      text-align:center;
+    }
+
+    .glimpse-modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      pointer-events:none;
+    }
+    .glimpse-modal[aria-hidden="false"]{
+      display:flex;
+      pointer-events:auto;
+    }
+
+    .glimpse-modal-backdrop{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65));
+      backdrop-filter: blur(3px);
+    }
+
+    .glimpse-modal-panel{
+      position:relative;
+      max-width:1100px;
+      width:92%;
+      margin:24px;
+      z-index:2;
+      align-self:center;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      pointer-events:auto;
+    }
+
+    .glimpse-modal-close{
+      position:absolute;
+      right:-6px;
+      top:-10px;
+      background:var(--white, #ffffff);
+      color:var(--primary, #1a9f70);
+      border:0;
+      border-radius:999px;
+      width:42px;
+      height:42px;
+      font-size:24px;
+      line-height:1;
+      box-shadow:0 8px 22px rgba(0,0,0,0.18);
+      cursor:pointer;
+      z-index:5;
+    }
+
+    .glimpse-modal-content{
+      background:transparent;
+      border-radius:12px;
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+    }
+    .glimpse-modal-content img{
+      width:100%;
+      height:auto;
+      max-height:80vh;
+      border-radius:10px;
+      object-fit:contain;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+    .glimpse-modal-caption{
+      color:#ffffff;
+      font-size:1rem;
+      text-align:center;
+      max-width:90%;
+      opacity:0.95;
+    }
+
+    @media (max-width:1100px){
+      .glimpse-grid-large{ grid-template-columns: repeat(2, 1fr); }
+      .glimpse-item img{ height:420px; }
+    }
+    @media (max-width:680px){
+      .glimpse-grid-large{ grid-template-columns: 1fr; }
+      .glimpse-item img{ height:420px; }
+      .glimpse-modal-panel{ width:96%; }
+    }
+    /* Mobile adjustments for logos & header */
+@media (max-width: 600px) {
+
+  /* Ensure header stays frozen */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* stronger stacking */
+    backdrop-filter: blur(6px); /* optional: smooth frosted look */
+  }
+
+  /* Logo images scale down properly */
+  .logo-img {
+    width: 120px;   /* reduce from 8rem */
+    height: auto;   /* keep proportions */
+  }
+
+  /* Reduce padding so header doesn’t take too much space */
+  .header-inner {
+    padding: 8px 14px;
+    gap: 12px;
+  }
+
+  /* Fix for the partner logo wrapper (which had fixed padding earlier) */
+  .logo > div {
+    padding: 2px !important;
+    border-radius: 4px;
+  }
+}
+
+    /* Glimpse previews: show full screenshot (no clipping), responsive */
+.glimpse-item {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* Give each card a consistent aspect ratio for layout stability.
+   Modern browsers support aspect-ratio; we also include a fallback (padding-top). */
+.glimpse-btn {
+  display:block;
+  width:100%;
+  border-radius:12px;
+  overflow:hidden;
+  background:transparent;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  transition: transform .18s ease, box-shadow .18s ease;
+  position: relative;
+}
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <!-- HEADER -->
+  <header aria-label="Main header">
+    <div class="header-inner">
+      <!-- Left logo -->
+      <a href="https://arcolab.com/products/noteiq" class="logo" aria-label="NoteIQ Home">
+        <img class="logo-img" src="images/Logo_NoteIQ.png" alt="NoteIQ logo">
+      </a>
 
-    <!-- LEFT SECTION -->
-    <div class="left-section">
-        <h1>Go <span>paperless</span> with NoteIQ.</h1>
-        <p>Your intelligent, compliant, and unified GxP documentation platform.</p>
-
-        <div class="feature">
-            <div class="feature-icon"></div>
-            <div class="feature-text">
-                <h3>Paperless Lifecycle Management</h3>
-                <p>Digitized end-to-end workflows with automated deliverables.</p>
-            </div>
+      <!-- Right logo -->
+      <a href="https://arcolab.com/" class="logo" aria-label="Partner">
+        <div style="background:white; border-radius:6px; padding:4px;">
+          <img class="logo-img" src="images/arcolab-vertical-logo.png" alt="Arcolab logo">
         </div>
+      </a>
+    </div>
+  </header>
 
-        <div class="feature">
-            <div class="feature-icon"></div>
-            <div class="feature-text">
-                <h3>AI-Driven Intelligence</h3>
-                <p>Risk mitigation, content generation & proactive insights.</p>
-            </div>
-        </div>
+  <!-- PAGE CONTENT -->
+  <main>
 
-        <div class="feature">
-            <div class="feature-icon"></div>
-            <div class="feature-text">
-                <h3>Built-in Compliance</h3>
-                <p>21 CFR Part 11, Annex 11, ERES-ready from day one.</p>
-            </div>
-        </div>
+    <!-- Form & Features (SECTION 2) -->
+    <section id="form-section" aria-labelledby="form-heading">
+      <div class="container">
+        <div class="split">
 
-        <div class="feature">
-            <div class="feature-icon"></div>
-            <div class="feature-text">
-                <h3>Centralized Monitoring & Analytics</h3>
-                <p>Real-time compliance visibility & dashboards.</p>
+          <!-- LEFT: heading + features -->
+          <div class="hero" id="form-left">
+            <h1 id="form-heading" class="form-heading">
+              Digital Validation Doesn’t Have to Break Your Budget!
+            </h1>
+            <p class="hero-lead">
+              NoteIQ offers a modern, fully digital validation platform that’s powerful, compliant — and priced for real-world teams.
+            </p>
+
+            <!-- Features (stacked vertically) -->
+            <div class="features-vertical" aria-hidden="false">
+
+              <div class="feature" tabindex="0">
+                <div class="icon">A</div>
+                <div>
+                  <h4>Flexible Configuration & Control</h4>
+                  <p>Allows easy workflow setup with controlled, role-based user access.</p>
+                </div>
+              </div>
+
+              <div class="feature" tabindex="0">
+                <div class="icon">B</div>
+                <div>
+                  <h4>Security & Compliance</h4>
+                  <p>Ensures regulatory compliance with strong encryption and enterprise-level security.</p>
+                </div>
+              </div>
+
+              <div class="feature" tabindex="0">
+                <div class="icon">C</div>
+                <div>
+                  <h4>Analytics & Reporting</h4>
+                  <p>Provides real-time insights through dashboards and detailed reports.</p>
+                </div>
+              </div>
+
+              <div class="feature" tabindex="0">
+                <div class="icon">D</div>
+                <div>
+                  <h4>Seamless Integrations</h4>
+                  <p>Connects smoothly with key enterprise systems like ERP, LIMS, QMS, and SAP.</p>
+                </div>
+              </div>
+        
             </div>
+
+            <p class="cta-text">
+              Curious how affordable digital validation can be?
+            </p>
+            <p class="cta-text">
+              Share a few details and we’ll walk you through a quick, no-pressure demo tailored to your needs.
+            </p>
+           
+          </div>
+
+          <!-- RIGHT: form script container -->
+          <div class="form-wrap" aria-label="Signup form">
+            <div id="fs-form-root">
+              <script src="https://arco-lab.myfreshworks.com/crm/sales/web_forms/2bd2509a7e16f4e8cbd7b953ae3f8e824d5e574d07bb9581ec1798103bc08f57/form.js"
+                      crossorigin="anonymous"
+                      id="fs_2bd2509a7e16f4e8cbd7b953ae3f8e824d5e574d07bb9581ec1798103bc08f57">
+              </script>
+            </div>
+          </div>
+
         </div>
+      </div>
+    </section>
+
+    <!-- Why should you trust us? (section 3) -->
+   <section id="trust" aria-labelledby="trust-heading">
+  <div class="trust-split" role="region" aria-label="Why trust NoteIQ">
+    <!-- LEFT: image -->
+    <div class="trust-left">
+      <div class="trust-image-card" tabindex="0" aria-hidden="false" role="img" aria-label="NoteIQ platform overview">
+        <!-- Replace the src below with your actual image path -->
+        <img src="images/screenshots/workflow-photo.png" alt="NoteIQ Approach" />
+      </div>
     </div>
 
-    <!-- FORM SECTION -->
-    <div class="form-section">
-        <script src='https://arco-lab.myfreshworks.com/crm/sales/web_forms/2bd2509a7e16f4e8cbd7b953ae3f8e824d5e574d07bb9581ec1798103bc08f57/form.js' crossorigin='anonymous' id='fs_2bd2509a7e16f4e8cbd7b953ae3f8e824d5e574d07bb9581ec1798103bc08f57'></script>
-    </div>
+    <!-- RIGHT: trust card content -->
+    <div class="trust-right">
+      <div class="trust-card" aria-labelledby="trust-card-title">
+        <h3 id="trust-card-title">Why organizations trust NoteIQ</h3>
 
-</div>
+        <ul class="trust-list" aria-label="Trust highlights">
+          <li>
+            <span class="star">⭐</span>
+            <span>Designed by experts with extensive experience in the pharmaceutical industry</span>
+          </li>
+
+          <li>
+            <span class="star">⭐</span>
+            <span>21 CFR Part 11 and Annexure 11 compliant</span>
+          </li>
+
+          <li>
+            <span class="star">⭐</span>
+            <span>Certified against <strong>ISO 27001</strong> and <strong>ISO 27701</strong> for information security and privacy</span>
+          </li>
+        </ul>
+
+        <p style="margin-top:14px; color:#2f3f3d;">We combine domain experience with enterprise-grade security practices to ensure your validation processes are compliant and auditable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- Some glimpses from our product (with modal) -->
+    <section id="glimpses" aria-labelledby="glimpses-heading">
+      <div class="container">
+        <h2 id="glimpses-heading" style="color:#ffffff; margin:0 0 22px 0; font-size:32px; font-weight:700; text-align:center;">
+          Some glimpses from our product
+        </h2>
+
+        <div class="glimpse-grid-large" role="list" aria-label="Product glimpses">
+          <figure class="glimpse-item" role="listitem">
+            <button class="glimpse-btn" data-src="images/screenshots/audit-trails.png"
+                    data-caption="Comprehensive Audit Trails"
+                    aria-label="Comprehensive Audit Trails">
+              <img src="images/screenshots/audit-trails.png"
+                   alt="Product screenshot 1" />
+            </button>
+            <figcaption class="glimpse-caption">Comprehensive Audit Trails</figcaption>
+          </figure>
+
+          <figure class="glimpse-item" role="listitem">
+            <button class="glimpse-btn" data-src="images/screenshots/e-signature.png"
+                    data-caption="Electronic Signatures for Process Approvals"
+                    aria-label="Electronic Signatures for Process Approvals">
+              <img src="images/screenshots/e-signature.png"
+                   alt="Product screenshot 2" />
+            </button>
+            <figcaption class="glimpse-caption">Electronic Signatures for Process Approvals</figcaption>
+          </figure>
+
+          <figure class="glimpse-item" role="listitem">
+            <button class="glimpse-btn" data-src="images/screenshots/repository-page.png"
+                    data-caption="Document Repository for file management"
+                    aria-label="Document Repository for file management">
+              <img src="images/screenshots/repository-page.png"
+                   alt="Product screenshot 3" />
+            </button>
+            <figcaption class="glimpse-caption">Document Repository for file management</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div id="glimpse-modal" class="glimpse-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="glimpse-modal-caption">
+        <div class="glimpse-modal-backdrop" data-close="true"></div>
+        <div class="glimpse-modal-panel" role="document">
+          <button class="glimpse-modal-close" aria-label="Close enlarged image">&times;</button>
+          <div class="glimpse-modal-content">
+            <img id="glimpse-modal-img" src="" alt="" />
+            <p id="glimpse-modal-caption" class="glimpse-modal-caption"></p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Get in touch (section 5) -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="contact-inner">
+          <div class="contact-details">
+            <h2 id="contact-heading" style="margin:0 0 8px 0;">Get in touch</h2>
+            <p class="muted">Email: <a href="mailto:reachus@arcolab.com" style="color:inherit; text-decoration:underline;">reachus@arcolab.com</a></p>
+            <div class="muted" aria-label="Address">
+              <strong>Address</strong>
+            </div>
+            <p class="contact-details address-line">19/2, Sarakki Village,</p>
+            <p class="contact-details address-line">15th Cross Rd, Dollars Layout,</p>
+            <p class="contact-details address-line">4th Phase, J.P. Nagar,</p>
+            <p class="contact-details address-line">Bengaluru, Karnataka. PIN: 560078</p>
+          </div>
+
+          <div>
+            <button class="btn" id="reach-btn" aria-controls="form-section" title="Go to form">Reach out to us</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> NoteIQ — All rights reserved.
+    </footer>
+
+  </main>
+
+  <script>
+    // Set dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll button: scroll back to the form
+    document.getElementById('reach-btn').addEventListener('click', function (e){
+      e.preventDefault();
+      const target = document.getElementById('form-section');
+      if (!target) return;
+      target.scrollIntoView({behavior:'smooth', block:'center'});
+      setTimeout(() => {
+        const firstInput = target.querySelector('input, textarea, select, button, [tabindex]');
+        if (firstInput) firstInput.focus({preventScroll:true});
+      }, 600);
+    });
+
+    // Accessibility: ensure large clickable areas on feature icons
+    document.querySelectorAll('.feature').forEach(f => f.setAttribute('tabindex', '0'));
+
+    // Small animation to draw attention to form on page load
+    (function pulseForm(){
+      const fw = document.querySelector('.form-wrap');
+      if(!fw) return;
+      fw.animate([
+        { boxShadow: '0 10px 30px rgba(0,0,0,0.08)' },
+        { boxShadow: '0 14px 40px rgba(0,0,0,0.12)' },
+        { boxShadow: '0 10px 30px rgba(0,0,0,0.08)' }
+      ], { duration: 1600, iterations: 1, easing: 'ease-in-out' });
+    })();
+
+    // Glimpse modal logic (kept intact)
+    (function(){
+      const modal = document.getElementById('glimpse-modal');
+      const modalImg = document.getElementById('glimpse-modal-img');
+      const modalCaption = document.getElementById('glimpse-modal-caption');
+      const closeBtn = document.querySelector('.glimpse-modal-close');
+      let lastFocused = null;
+
+      document.querySelectorAll('.glimpse-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const src = btn.getAttribute('data-src');
+          const caption = btn.getAttribute('data-caption') || '';
+          const alt = btn.querySelector('img')?.alt || '';
+
+          lastFocused = btn;
+
+          modalImg.src = src;
+          modalImg.alt = alt;
+          modalCaption.textContent = caption;
+
+          modal.setAttribute('aria-hidden', 'false');
+          closeBtn.focus();
+
+          document.documentElement.style.overflow = 'hidden';
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function closeModal(){
+        modal.setAttribute('aria-hidden', 'true');
+        modalImg.src = '';
+        modalCaption.textContent = '';
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        if(lastFocused) lastFocused.focus();
+      }
+
+      document.querySelectorAll('[data-close="true"]').forEach(el => {
+        el.addEventListener('click', closeModal);
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+
+      document.addEventListener('keydown', function (e){
+        if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false'){
+          closeModal();
+        }
+      });
+
+      modal.addEventListener('click', function(e){
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('focus', function(e){
+        if (modal.getAttribute('aria-hidden') === 'false'){
+          const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          if (focusable.length && !modal.contains(e.target)){
+            e.stopPropagation();
+            focusable[0].focus();
+          }
+        }
+      }, true);
+    })();
+  </script>
 
 </body>
 </html>
